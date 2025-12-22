@@ -1,0 +1,7 @@
+{
+  "name": "InvoFlow CRM",
+  "description": "Plateforme complète de gestion de factures et d'extraction RPA avec suivi des crédits et conformité e-UF.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
