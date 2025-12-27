@@ -1,5 +1,5 @@
 
-import { ExtractionStatus, RPAStatus, Invoice, Batch, User, Client, Article } from './types';
+import { ExtractionStatus, RPAStatus, Invoice, Batch, User, Client, Article, Nid } from './types';
 
 export const MOCK_INVOICES: Invoice[] = [
   {
@@ -32,6 +32,22 @@ export const MOCK_INVOICES: Invoice[] = [
     vendorAddress: 'Avenue des Champs-Élysées, Paris',
     taxId: 'FR-111222333',
     items: []
+  },
+  {
+    id: 'FAC-2023-003',
+    date: '25 Oct 2023',
+    client: 'Wayne Enterprises',
+    amount: 980.00,
+    currency: 'EUR',
+    extractionStatus: ExtractionStatus.OK,
+    rpaStatus: RPAStatus.IN_PROGRESS,
+    creditCost: 1,
+    vendorName: 'Wayne Supplies',
+    vendorAddress: '1007 Mountain Drive, Gotham',
+    taxId: 'FR-444555666',
+    items: [
+      { description: 'Support & Maintenance', qty: 1, unitPrice: 980, amount: 980 }
+    ]
   }
 ];
 
@@ -62,4 +78,9 @@ export const MOCK_CLIENTS: Client[] = [
 export const MOCK_ARTICLES: Article[] = [
   { id: 'A1', name: 'Consulting IT', code: 'SRV-001', price: 150 },
   { id: 'A2', name: 'Licence SaaS', code: 'LIC-002', price: 49.90 }
+];
+
+export const MOCK_NIDS: Nid[] = [
+  { id: 'N1', label: 'Siège social', address: '123 Rue de la Paix, 75001 Paris' },
+  { id: 'N2', label: 'Entrepôt', address: '10 Avenue de l’Industrie, 69000 Lyon' }
 ];

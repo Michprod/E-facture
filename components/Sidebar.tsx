@@ -10,7 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const navItems = [
     { name: 'Tableau de bord', icon: 'dashboard', path: '/dashboard' },
     { name: 'Factures', icon: 'description', path: '/invoices' },
-    { name: 'Lots de fichiers', icon: 'layers', path: '/batches' },
+    { name: 'Traitement', icon: 'layers', path: '/batches' },
     { name: 'Déposer', icon: 'cloud_upload', path: '/upload' },
     { name: 'Crédits', icon: 'account_balance_wallet', path: '/credits' },
     { name: 'Configuration', icon: 'settings', path: '/configuration' },
@@ -26,8 +26,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
              <span className="material-symbols-outlined text-xl">account_tree</span>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-none">InvoFlow</h1>
-            <p className="text-slate-400 text-[10px] font-medium uppercase tracking-wider">Solution CRM</p>
+            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-none">Auto</h1>
+            <p className="text-slate-400 text-[10px] font-medium uppercase tracking-wider">E-facture</p>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           </div>
           <div className="flex flex-col overflow-hidden">
             <p className="text-slate-900 dark:text-white text-xs font-bold truncate">Alex Morgan</p>
-            <p className="text-slate-500 text-[10px] truncate uppercase">Admin</p>
+            <p className="text-slate-500 text-[10px] truncate uppercase">Administrateur</p>
           </div>
         </div>
       </div>

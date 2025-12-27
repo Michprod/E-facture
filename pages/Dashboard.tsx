@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MOCK_BATCHES } from '../constants';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -15,22 +15,82 @@ const CHART_DATA = [
 ];
 
 const Dashboard: React.FC = () => {
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    const seen = localStorage.getItem('onboardingSeen');
+    if (seen !== 'true') setShowOnboarding(true);
+  }, []);
+
   return (
     <div className="flex flex-col gap-8">
+      {showOnboarding && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-xl p-6 shadow-2xl border dark:border-slate-800">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-base font-bold">Bienvenue sur InvoFlow</h3>
+              <button
+                onClick={() => {
+                  setShowOnboarding(false);
+                  localStorage.setItem('onboardingSeen', 'true');
+                }}
+                className="text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                <span className="material-symbols-outlined text-lg">close</span>
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                Avant de commencer, pense à configurer tes données de base.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-3 bg-slate-50/50 dark:bg-slate-800/30">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Clients</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mt-1">Fichier clients</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-3 bg-slate-50/50 dark:bg-slate-800/30">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Produits</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mt-1">Articles & services</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-3 bg-slate-50/50 dark:bg-slate-800/30">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">N.I.D</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mt-1">Noms / Identifiants</p>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500">
+                Tu peux tout gérer dans le menu <span className="font-bold">Configuration</span>.
+              </p>
+            </div>
+
+            <div className="flex justify-end gap-2 mt-6">
+              <button
+                onClick={() => {
+                  setShowOnboarding(false);
+                  localStorage.setItem('onboardingSeen', 'true');
+                }}
+                className="px-3 py-1.5 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50"
+              >
+                Plus tard
+              </button>
+              <Link
+                to="/configuration"
+                onClick={() => {
+                  setShowOnboarding(false);
+                  localStorage.setItem('onboardingSeen', 'true');
+                }}
+                className="px-3 py-1.5 rounded-lg text-sm font-bold text-white bg-primary hover:bg-primary-hover transition-all"
+              >
+                Aller à la configuration
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Vue d'ensemble</h2>
           <p className="text-slate-500 text-sm font-medium mt-0.5">Activité d'extraction et crédits en temps réel.</p>
-        </div>
-        <div className="flex gap-2">
-          <Link to="/invoices/new" className="flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 text-xs font-bold py-2.5 px-4 rounded-lg transition-all shadow-sm hover:bg-slate-50">
-            <span className="material-symbols-outlined text-lg">add</span>
-            <span>Facture manuelle</span>
-          </Link>
-          <Link to="/upload" className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white text-xs font-bold py-2.5 px-4 rounded-lg transition-all shadow-md shadow-primary/20">
-            <span className="material-symbols-outlined text-lg">cloud_upload</span>
-            <span>Nouveau dépôt</span>
-          </Link>
         </div>
       </div>
 

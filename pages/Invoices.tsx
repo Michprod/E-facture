@@ -57,7 +57,7 @@ const Invoices: React.FC = () => {
                 <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Date</th>
                 <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Client</th>
                 <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Montant</th>
-                <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Extraction</th>
+                <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Statut</th>
                 <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">RPA</th>
                 <th className="px-6 py-4"></th>
               </tr>
@@ -74,12 +74,17 @@ const Invoices: React.FC = () => {
                       {inv.extractionStatus === ExtractionStatus.OK ? 'OK' : 'Erreur'}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 flex items-center gap-2">
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
                       inv.rpaStatus === RPAStatus.COMPLETED ? 'bg-slate-100 text-slate-600' : 'bg-primary/5 text-primary'
                     }`}>
                       {inv.rpaStatus === RPAStatus.COMPLETED ? 'Injecté' : 'En cours'}
                     </span>
+                    {inv.rpaStatus !== RPAStatus.COMPLETED && (
+                      <Link to={`/rpa/${inv.id}`} className="text-slate-400 hover:text-primary" title="Voir le process RPA">
+                        <span className="material-symbols-outlined text-[18px]">keyboard_return</span>
+                      </Link>
+                    )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <Link to={`/invoices/${inv.id}`} className="text-slate-400 hover:text-primary p-1">

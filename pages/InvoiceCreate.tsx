@@ -6,11 +6,11 @@ import { MOCK_CLIENTS, MOCK_ARTICLES } from '../constants';
 const InvoiceCreate: React.FC = () => {
   const navigate = useNavigate();
   const [selectedClient, setSelectedClient] = useState('');
-  const [items, setItems] = useState([{ description: '', qty: 1, price: 0 }]);
+  const [items, setItems] = useState([{ productId: '', qty: 1, price: 0 }]);
   const [showNewClientForm, setShowNewClientForm] = useState(false);
 
   const addItem = () => {
-    setItems([...items, { description: '', qty: 1, price: 0 }]);
+    setItems([...items, { productId: '', qty: 1, price: 0 }]);
   };
 
   const removeItem = (index: number) => {
@@ -84,17 +84,30 @@ const InvoiceCreate: React.FC = () => {
               {items.map((item, index) => (
                 <div key={index} className="flex flex-col md:flex-row gap-4 items-end p-5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-slate-800 border-slate-100">
                   <div className="flex-1 w-full flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase text-slate-400">Description</label>
-                    <input 
-                      placeholder="Désignation de l'article" 
+                    <label className="text-[10px] font-bold uppercase text-slate-400">Produit / Service</label>
+                    <select
                       className="rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 text-sm h-11 px-3.5 w-full"
-                      value={item.description}
+                      value={item.productId}
                       onChange={(e) => {
                         const newItems = [...items];
-                        newItems[index].description = e.target.value;
+                        const productId = e.target.value;
+                        newItems[index].productId = productId;
+
+                        const selected = MOCK_ARTICLES.find(a => a.id === productId);
+                        if (selected) {
+                          newItems[index].price = selected.price;
+                        }
+
                         setItems(newItems);
                       }}
-                    />
+                    >
+                      <option value="">Sélectionner un produit ou service</option>
+                      {MOCK_ARTICLES.map(a => (
+                        <option key={a.id} value={a.id}>
+                          {a.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="w-full md:w-20 flex flex-col gap-1.5">
                     <label className="text-[10px] font-bold uppercase text-slate-400 text-center">Qté</label>

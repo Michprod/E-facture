@@ -21,7 +21,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           <div className="bg-primary size-12 rounded-xl flex items-center justify-center text-white">
             <span className="material-symbols-outlined text-2xl">account_tree</span>
           </div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">InvoFlow CRM</h1>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white">Auto CRM</h1>
           <p className="text-slate-500 text-sm text-center">Identifiez-vous pour accéder à votre espace de gestion.</p>
         </div>
 
@@ -63,7 +63,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
           <p className="text-xs text-slate-500">
-            &copy; 2024 InvoFlow CRM. Sécurisé par AES-256.
+            &copy; 2024 Auto CRM. Sécurisé par AES-256.
           </p>
         </div>
       </div>

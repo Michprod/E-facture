@@ -13,6 +13,9 @@ import Batches from './pages/Batches';
 import BatchDetail from './pages/BatchDetail';
 import Credits from './pages/Credits';
 import Configuration from './pages/Configuration';
+import RpaProcess from './pages/RpaProcess';
+import Unauthorized from './pages/Unauthorized';
+import RequirePermission from './components/RequirePermission';
 
 const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -54,15 +57,17 @@ const App: React.FC = () => {
     <HashRouter>
       <Routes>
         <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />} />
-        <Route path="/dashboard" element={isAuthenticated ? <ProtectedLayout><Dashboard /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/invoices" element={isAuthenticated ? <ProtectedLayout><Invoices /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/invoices/new" element={isAuthenticated ? <ProtectedLayout><InvoiceCreate /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/invoices/:id" element={isAuthenticated ? <ProtectedLayout><InvoiceDetail /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/upload" element={isAuthenticated ? <ProtectedLayout><Upload /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/batches" element={isAuthenticated ? <ProtectedLayout><Batches /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/batches/:id" element={isAuthenticated ? <ProtectedLayout><BatchDetail /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/credits" element={isAuthenticated ? <ProtectedLayout><Credits /></ProtectedLayout> : <Navigate to="/login" />} />
-        <Route path="/configuration" element={isAuthenticated ? <ProtectedLayout><Configuration onLogout={handleLogout} /></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/non-autorise" element={isAuthenticated ? <ProtectedLayout><Unauthorized /></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/dashboard" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="DASHBOARD"><Dashboard /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/invoices" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="FACTURES_LECTURE"><Invoices /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/invoices/new" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="FACTURES_CREATION"><InvoiceCreate /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/invoices/:id" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="FACTURES_LECTURE"><InvoiceDetail /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/rpa/:invoiceId" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="TRAITEMENT"><RpaProcess /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/upload" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="DEPOT"><Upload /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/batches" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="TRAITEMENT"><Batches /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/batches/:id" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="TRAITEMENT"><BatchDetail /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/credits" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="CREDITS"><Credits /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
+        <Route path="/configuration" element={isAuthenticated ? <ProtectedLayout><RequirePermission permission="CONFIGURATION"><Configuration onLogout={handleLogout} /></RequirePermission></ProtectedLayout> : <Navigate to="/login" />} />
         <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} />
       </Routes>
     </HashRouter>

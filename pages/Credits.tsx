@@ -16,9 +16,9 @@ const Credits: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { name: 'Starter', price: '19€', credits: '1 000', features: ['1 utilisateur', 'Support Email', 'Export Excel'] },
-            { name: 'Business', price: '49€', credits: '5 000', features: ['5 utilisateurs', 'Support 24/7', 'RPA Prioritaire', 'API e-UF Standard'] },
-            { name: 'Enterprise', price: '199€', credits: '20 000', features: ['Illimité', 'Account Manager', 'Audit conformité', 'API e-UF Turbo'] }
+            { name: 'Débutant', price: '19€', credits: '1 000', features: ['1 utilisateur', 'Support e-mail', 'Export Excel'] },
+            { name: 'Business', price: '49€', credits: '5 000', features: ['5 utilisateurs', 'Support 24/7', 'RPA prioritaire', 'API e-UF standard'] },
+            { name: 'Entreprise', price: '199€', credits: '20 000', features: ['Illimité', 'Responsable de compte', 'Audit conformité', 'API e-UF Turbo'] }
           ].map((plan, i) => (
             <div key={i} className={`p-8 rounded-3xl border flex flex-col gap-6 transition-all relative overflow-hidden ${plan.name === 'Business' ? 'border-primary shadow-xl shadow-primary/10 bg-primary/5' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm'}`}>
               {plan.name === 'Business' && (
@@ -54,7 +54,7 @@ const Credits: React.FC = () => {
     <div className="flex flex-col gap-8">
       <div>
         <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-1">Crédits & Consommation</h1>
-        <p className="text-slate-500 text-base">Suivez l'utilisation de vos ressources InvoFlow.</p>
+        <p className="text-slate-500 text-base">Suivez l'utilisation de vos ressources Auto.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -113,7 +113,7 @@ const Credits: React.FC = () => {
         <div className="lg:col-span-4 flex flex-col gap-8">
           <div className="bg-slate-900 dark:bg-slate-800 text-white rounded-[2rem] p-8 flex flex-col gap-8 shadow-xl sticky top-28">
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-bold">Plan Preview</h3>
+              <h3 className="text-lg font-bold">Aperçu du plan</h3>
               <p className="text-slate-400 text-xs">Vous profitez de l'offre Business</p>
             </div>
             

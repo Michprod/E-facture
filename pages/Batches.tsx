@@ -8,12 +8,12 @@ const Batches: React.FC = () => {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="text-slate-900 dark:text-white text-3xl md:text-4xl font-bold tracking-tight">Batch Management</h1>
-          <p className="text-slate-500 text-base">Monitor the status and results of uploaded invoice files.</p>
+          <h1 className="text-slate-900 dark:text-white text-3xl md:text-4xl font-bold tracking-tight">Gestion des lots</h1>
+          <p className="text-slate-500 text-base">Suivez le statut et les résultats des factures déposées.</p>
         </div>
         <Link to="/upload" className="flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 text-white h-11 px-6 text-sm font-semibold transition-all shadow-sm active:scale-95">
           <span className="material-symbols-outlined text-[20px]">upload_file</span>
-          <span>Upload New Batch</span>
+          <span>Déposer un nouveau lot</span>
         </Link>
       </div>
 
@@ -22,11 +22,11 @@ const Batches: React.FC = () => {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
-                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Batch Name</th>
-                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Date Uploaded</th>
-                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Origin</th>
-                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Status</th>
-                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 w-1/4">Results</th>
+                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Nom du lot</th>
+                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Date de dépôt</th>
+                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Origine</th>
+                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500">Statut</th>
+                <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 w-1/4">Résultats</th>
                 <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 text-right">Actions</th>
               </tr>
             </thead>
@@ -65,8 +65,8 @@ const Batches: React.FC = () => {
                   <td className="py-4 px-6">
                     <div className="flex flex-col gap-1.5">
                       <div className="flex justify-between text-xs">
-                        <span className="font-medium text-emerald-600">{batch.successCount} Success</span>
-                        <span className="text-slate-400">{batch.totalInvoices} Total</span>
+                        <span className="font-medium text-emerald-600">{batch.successCount} succès</span>
+                        <span className="text-slate-400">{batch.totalInvoices} total</span>
                       </div>
                       <div className="flex h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700">
                         <div className="h-full bg-emerald-500" style={{ width: `${(batch.successCount / batch.totalInvoices) * 100}%` }}></div>

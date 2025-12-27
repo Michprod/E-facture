@@ -68,3 +68,9 @@ export interface Article {
   code: string;
   price: number;
 }
+
+export interface Nid {
+  id: string;
+  label: string;
+  address: string;
+}

@@ -11,20 +11,20 @@ const BatchDetail: React.FC = () => {
     <div className="flex flex-col gap-8">
        {/* Breadcrumbs */}
       <nav className="flex items-center text-sm font-medium text-slate-500">
-        <Link to="/batches" className="hover:text-primary transition-colors">Batches</Link>
+        <Link to="/batches" className="hover:text-primary transition-colors">Lots</Link>
         <span className="mx-2 text-slate-300">/</span>
-        <span className="text-slate-900 dark:text-white font-bold">Batch #{batch.id}</span>
+        <span className="text-slate-900 dark:text-white font-bold">Lot #{batch.id}</span>
       </nav>
 
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">{batch.name}</h1>
-          <p className="text-slate-500">Created on {batch.dateCreated} • <span className="font-medium text-slate-700 dark:text-slate-300">Total Value: ${batch.totalValue.toLocaleString()}</span></p>
+          <p className="text-slate-500">Créé le {batch.dateCreated} • <span className="font-medium text-slate-700 dark:text-slate-300">Valeur totale : {batch.totalValue.toLocaleString()} €</span></p>
         </div>
         <div className="flex items-center gap-3">
           <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-white font-medium hover:bg-slate-50 shadow-sm">
             <span className="material-symbols-outlined text-[20px]">download</span>
-            <span>Export CSV</span>
+            <span>Exporter CSV</span>
           </button>
         </div>
       </div>
@@ -32,11 +32,11 @@ const BatchDetail: React.FC = () => {
       <div className="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="flex justify-between items-end mb-2">
           <div>
-            <p className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-1">Processing Status</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-1">Statut de traitement</p>
           </div>
           <div className="text-right">
             <span className="text-2xl font-bold text-primary">85%</span>
-            <span className="text-sm text-slate-500 ml-1">Complete</span>
+            <span className="text-sm text-slate-500 ml-1">Terminé</span>
           </div>
         </div>
         <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
@@ -46,10 +46,10 @@ const BatchDetail: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Invoices', value: batch.totalInvoices, icon: 'receipt_long', color: 'slate' },
-          { label: 'Success', value: batch.successCount, icon: 'check_circle', color: 'green' },
-          { label: 'Errors', value: batch.errorCount, icon: 'error', color: 'red' },
-          { label: 'Needs Review', value: 7, icon: 'warning', color: 'amber' },
+          { label: 'Factures totales', value: batch.totalInvoices, icon: 'receipt_long', color: 'slate' },
+          { label: 'Succès', value: batch.successCount, icon: 'check_circle', color: 'green' },
+          { label: 'Erreurs', value: batch.errorCount, icon: 'error', color: 'red' },
+          { label: 'À vérifier', value: 7, icon: 'warning', color: 'amber' },
         ].map((stat, i) => (
           <div key={i} className={`bg-white dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-1 ${stat.color === 'red' && 'ring-1 ring-red-500/20'}`}>
             <span className="text-sm font-medium text-slate-500">{stat.label}</span>
@@ -64,15 +64,15 @@ const BatchDetail: React.FC = () => {
       </div>
 
       <div className="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100 dark:border-slate-800 font-bold">Invoices in Batch</div>
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 font-bold">Factures du lot</div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 dark:bg-slate-800/50">
               <tr>
-                <th className="p-4 font-semibold text-slate-500 uppercase">Ref ID</th>
-                <th className="p-4 font-semibold text-slate-500 uppercase">Vendor</th>
-                <th className="p-4 font-semibold text-slate-500 uppercase text-right">Amount</th>
-                <th className="p-4 font-semibold text-slate-500 uppercase">Status</th>
+                <th className="p-4 font-semibold text-slate-500 uppercase">Réf.</th>
+                <th className="p-4 font-semibold text-slate-500 uppercase">Fournisseur</th>
+                <th className="p-4 font-semibold text-slate-500 uppercase text-right">Montant</th>
+                <th className="p-4 font-semibold text-slate-500 uppercase">Statut</th>
                 <th className="p-4 font-semibold text-slate-500 uppercase text-right">Actions</th>
               </tr>
             </thead>
@@ -83,7 +83,7 @@ const BatchDetail: React.FC = () => {
                   <td className="p-4 text-slate-900 dark:text-white font-medium">{inv.client}</td>
                   <td className="p-4 text-right font-mono">${inv.amount.toFixed(2)}</td>
                   <td className="p-4">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Success</span>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Succès</span>
                   </td>
                   <td className="p-4 text-right">
                     <Link to={`/invoices/${inv.id}`} className="text-slate-400 hover:text-primary"><span className="material-symbols-outlined text-[18px]">visibility</span></Link>
